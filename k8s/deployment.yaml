@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellokubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellokubernetes
+  template:
+    metadata:
+      labels:
+        app: hellokubernetes
+    spec:
+      containers:
+      - name: hellokubernetes
+        image: gcr.io/hello-kubernetes-229223/hellokubernetes:1.0.0
+        ports:
+        - containerPort: 3000
