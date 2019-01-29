@@ -1,0 +1,25 @@
+{
+  "type": "postgres",
+  "host": "db",
+  "port": 5432,
+  "username": "hellouser",
+  "password": "hellopassword",
+  "database": "hellokubernetes",
+  "synchronize": false,
+  "migrationsRun": true,
+  "logging": false,
+  "entities": [
+     "dist/entity/**/*.js"
+  ],
+  "migrations": [
+     "dist/migration/**/*.js"
+  ],
+  "subscribers": [
+     "dist/subscriber/**/*.js"
+  ],
+  "cli": {
+     "entitiesDir": "src/entity",
+     "migrationsDir": "src/migration",
+     "subscribersDir": "src/subscriber"
+  }
+}
