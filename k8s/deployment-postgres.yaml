@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellokubernetes-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellokubernetes-postgres
+  template:
+    metadata:
+      labels:
+        app: hellokubernetes-postgres
+    spec:
+      containers:
+        - name: hellokubernetes-postgres
+          image: postgres:11.1
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hellokubernetes-postgres
+                  key: password
+            - name: PGDATA
+              value: "/var/lib/postgresql/data/pgdata"
+          ports:
+            - containerPort: 5432 
+          volumeMounts:
+            - name: hellokubernetes-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: hellokubernetes-persistent-storage
+          persistentVolumeClaim:
+            claimName: hellokubernetes-volumeclaim
